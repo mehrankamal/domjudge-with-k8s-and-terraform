@@ -64,7 +64,10 @@ So, we will need the above components to deploy DomJudge to our K8s cluster on A
 
 So, lets get the cluster itself up and running with a Azure SQL database using `terraform`. Then we can come towards applying the Kubernetes configs and get the ball rolling.
 
-![alt Just Terraform things](static/terraform-meme.jpeg)
+
+<p align="center">
+  <img src="static/terraform-meme.jpeg" />
+</p>
 
 
 ## Todo next:
