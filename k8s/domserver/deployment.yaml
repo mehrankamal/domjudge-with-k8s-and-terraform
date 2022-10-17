@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: domjudge-server
+  namespace: inscope
+  labels:
+    app: domjudge-server
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: domjudge
+      component: server
+
+  template:
+    metadata:
+      labels:
+        app: domjudge
+        component: server
+    spec:
+      containers:
+      - name: server
+        image: domjudge/domserver:8.1.3
+        livenessProbe:
+          httpGet:
+            path: /public
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /public
+            port: 80
+
+        env:
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: domjudge-server-config
+                key: MYSQL_HOST
+          - name: MYSQL_USER
+            valueFrom:
+              configMapKeyRef:
+                name: domjudge-server-config
+                key: MYSQL_USER
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: domjudge-server-secrets
+                key: MYSQL_PASSWORD
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: domjudge-server-config
+                key: MYSQL_DATABASE
+          - name: CONTAINER_TIMEZONE
+            valueFrom:
+              configMapKeyRef:
+                name: domjudge-server-config
+                key: CONTAINER_TIMEZONE
+        ports:
+        - containerPort: 80
+

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: domjudge-server-config
+  namespace: inscope
+  
+data:
+  MYSQL_HOST: "host.minikube.internal"
+  MYSQL_USER: domjudge
+  MYSQL_DATABASE: domjudge
+  CONTAINER_TIMEZONE: "Asia/Karachi"
