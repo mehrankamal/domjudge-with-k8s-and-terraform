@@ -57,6 +57,11 @@ spec:
               configMapKeyRef:
                 name: domjudge-server-config
                 key: CONTAINER_TIMEZONE
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: domjudge-server-secrets
+                key: MYSQL_ROOT_PASSWORD
         ports:
         - containerPort: 80
 
